@@ -1,0 +1,40 @@
+<div class='card'>
+  <div class='card-header'>
+    {{pageTitle}}
+  </div>
+  <div class='card-body'>
+    <div class='row'>
+      <div class='col-md-2'>Filter by:</div>
+      <div class='col-md-4'>
+        <input type='text' [(ngModel)]='filterText' />
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-6'>
+        <h4>Filtered by: {{filterText}}</h4>
+      </div>
+    </div>
+    <div class='table-responsive'>
+      <table class='table' *ngIf='bonds && bonds.length'>
+        <thead>
+          <tr>
+            <th>Cusip</th>
+            <th>Asset Type</th>
+            <th>Issuer Industry</th>
+            <th>Coupon Type</th>
+            <th>Dated Dt.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor='let bond of filteredBonds'>
+            <td><a [routerLink]="['/bonds', bond.cusip]">{{bond.cusip}}</a></td>
+            <td>{{bond.assetType}}</td>
+            <td>{{bond.issuerIndustry}}</td>
+            <td>{{bond.couponType}}</td>
+            <td>{{bond.datedDate | date:'shortDate'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
