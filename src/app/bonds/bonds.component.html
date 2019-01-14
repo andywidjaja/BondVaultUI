@@ -27,7 +27,7 @@
         </thead>
         <tbody>
           <tr *ngFor='let bond of filteredBonds'>
-            <td><a [routerLink]="['/bonds', bond.cusip]">{{bond.cusip}}</a></td>
+            <td><a [routerLink]="['/bonds', bond.id]">{{bond.cusip}}</a></td>
             <td>{{bond.assetType}}</td>
             <td>{{bond.issuerIndustry}}</td>
             <td>{{bond.couponType}}</td>

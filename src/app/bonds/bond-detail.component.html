@@ -3,16 +3,37 @@
     {{pageTitle}}
   </div>
   <div class='card-body'>
+    <form novalidate
+          (ngSubmit)="saveBond()" [formGroup]="bondForm">
       <div class='row'>
         <div class='col-md-8'>
           <div class='row'>
-            <div class='col-md-4'>Cusip:</div>
-            <div class='col-md-8'>{{bond.cusip}}</div>
+            <div class='col-md-4'>
+                <label for='cusipId'>Cusip:</label>
+            </div>
+            <!--<div class='col-md-8'>{{bond.cusip}}</div>-->
+            <div class='col-md-8'>
+                <input id="cusipId"
+                      type="text"
+                      placeholder="Cusip"
+                      formControlName="cusip" 
+                [ngClass]="{'is-invalid': cusipMessage}" />
+                <span class="text-danger">
+                  {{ cusipMessage }}
+                </span>
+            </div>
           </div>
           <div class='row'>
-              <div class='col-md-4'>Asset Type:</div>
-              <div class='col-md-8'>{{bond.assetType}}</div>
+            <div class='col-md-4'>
+                <label for='assetTypeId'>Asset Type:</label>
             </div>
+            <div class='col-md-8'>
+                <select id='assetTypeId' formControlName='assetType'>
+                  <option value='0'>--Select--</option> 
+                  <option *ngFor='let assetType of assetTypes' [value]='assetType.assetType'>{{assetType.assetType}}</option>
+                </select>
+            </div>
+          </div>
           <div class='row'>
             <div class='col-md-4'>Issuer Industry:</div>
             <div class='col-md-8'>{{bond.issuerIndustry}}</div>
@@ -38,12 +59,32 @@
               <div class='col-md-8'>{{bond.securityType2}}</div>
           </div>
           <div class='row'>
-              <div class='col-md-4'>Coupon Type:</div>
-              <div class='col-md-8'>{{bond.couponType}}</div>
+            <div class='col-md-4'>
+                <label for='couponTypeId'>Coupon Type:</label>
+            </div>
+            <div class='col-md-8'>
+                <select id='couponTypeId' formControlName='couponType'>
+                  <option value='0'>--Select--</option>
+                  <option *ngFor='let couponType of couponTypes' [value]='couponType.couponType'>{{couponType.couponType}}</option>
+                </select>
+            </div>
           </div>
           <div class='row'>
-              <div class='col-md-4'>Market Sector Description:</div>
-              <div class='col-md-8'>{{bond.marketSectorDescription}}</div>
+            <div class='col-md-4'>
+              <label for='marketSectorDescriptionId'>Market Sector Description</label>
+            </div>
+            <div class='col-md-8'>
+              <input id="marketSectorDescriptionId"
+                type="text"
+                placeholder="Market sector description"
+                formControlName="marketSectorDescription" 
+                [ngClass]="{'is-invalid': marketSectorDescriptionMessage}" />
+              <!--<span class="text-danger">
+                {{ marketSectorDescriptionMessage }}
+              </span>-->
+            </div>
+            <!--<div class='col-md-4'>Market Sector Description:</div>-->
+            <!--<div class='col-md-8'>{{bond.marketSectorDescription}}</div>-->
           </div>
           <div class='row'>
               <div class='col-md-4'>Mortgage Collateral Type:</div>
@@ -55,22 +96,48 @@
           </div>
           <div class='row'>
               <div class='col-md-4'>Bank Qualified:</div>
-              <div class='col-md-8'>{{bond.bankQualified}}</div>
+              <div class='col-md-8'>
+                  <mat-radio-group formControlName='bankQualifiedFlag'>  
+                      <mat-radio-button value='N'>No</mat-radio-button>  
+                      <mat-radio-button value='Y'>Yes</mat-radio-button>  
+                  </mat-radio-group>
+              </div>
           </div>
           <div class='row'>
-              <div class='col-md-4'>Dated Date:</div>
-              <div class='col-md-8'>{{bond.datedDate}}</div>
+              <div class='col-md-4'>
+                  <label for='datedDateId'>Dated Date:</label>
+              </div>
+              <div class='col-md-8'> 
+                <input id='datedDateId' formControlName="datedDate" matInput [matDatepicker]="datedDate" placeholder="Dated date">  
+                <mat-datepicker-toggle matSuffix [for]="datedDate"></mat-datepicker-toggle>  
+                <mat-datepicker touchUi="true" #datedDate></mat-datepicker>
+              </div>
           </div>
           <div class='row'>
               <div class='col-md-4'>Capital Purpose:</div>
               <div class='col-md-8'>{{bond.capitalPurpose}}</div>
           </div>
+          <div class='row'>
+            <div class='col-md-4'>
+                <button class="btn btn-primary"
+                        type="submit"
+                        style="width:80px"
+                        [disabled]="!bondForm.valid">
+                  Save
+                </button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class='card-footer'>
-        <button class='btn btn-outline-secondary' (click)='onBack()' style='width:80px'>
-          <i class='fa fa-chevron-left'> Back</i>
-        </button>
-      </div>
+    </form>
+  </div>
+  <div class='card-footer'>
+    <button class='btn btn-outline-secondary' (click)='onBack()' style='width:80px'>
+      <i class='fa fa-chevron-left'> Back</i>
+    </button>
+  </div>
 </div>
+<br>Dirty: {{bondForm.dirty}}
+<br>Touched: {{bondForm.touched}}
+<br>Valid: {{bondForm.valid}}
+<br>Value: {{bondForm.value | json}}

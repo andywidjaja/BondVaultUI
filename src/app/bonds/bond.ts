@@ -1,4 +1,6 @@
 export interface IBond {
+    id: number;
+
     cusip: string;
 
     assetType: string;

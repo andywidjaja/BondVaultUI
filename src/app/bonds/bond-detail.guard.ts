@@ -14,9 +14,9 @@ export class BondDetailGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      let cusip = next.url[1].path;
+      let id = next.url[1].path;
 
-      this.bondService.getBond(cusip).subscribe(
+      this.bondService.getBond(+id).subscribe(
         bond => {
           //console.log(bond);
           if (!bond)
