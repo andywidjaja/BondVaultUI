@@ -28,6 +28,8 @@ export class BondDetailComponent implements OnInit {
 
   bondForm: FormGroup;
 
+  loading: boolean = true;
+
   private validationMessage = {
     minlength: 'Cusip must be longer than 9 characters'
   };
@@ -37,6 +39,7 @@ export class BondDetailComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder,
               private store: Store<fromBond.State>) {
+    this.loading = true;
   }
 
   ngOnInit() {
@@ -106,6 +109,8 @@ export class BondDetailComponent implements OnInit {
     }
 
     this.bond = bond;
+
+    this.loading = false;
 
     if (this.bond.id === 0) {
       this.pageTitle = 'Add Bond';

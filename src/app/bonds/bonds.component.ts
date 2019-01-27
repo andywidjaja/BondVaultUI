@@ -11,6 +11,7 @@ export class BondsComponent implements OnInit {
   pageTitle: string = 'Bond List';
   bonds: IBond[];
   errorMessage: string = '';
+  loading: boolean = true;
 
   _filterText: string;
   get filterText(): string {
@@ -24,6 +25,7 @@ export class BondsComponent implements OnInit {
   filteredBonds: IBond[];
 
   constructor(private bondService: BondService) {
+    this.loading = true;
   }
 
   ngOnInit() {
@@ -31,6 +33,7 @@ export class BondsComponent implements OnInit {
       bonds => {
         this.bonds = bonds;
         this.filteredBonds = this.bonds;
+        this.loading = false;
       },
       error => this.errorMessage = <any>error);
   }

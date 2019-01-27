@@ -21,7 +21,7 @@ import { BondModule } from './bonds/bond.module';
   ],
   imports: [
     BrowserModule,
-    InMemoryWebApiModule.forRoot(BondData, {passThruUnknownUrl: true}),
+    InMemoryWebApiModule.forRoot(BondData, {passThruUnknownUrl: true, delay: 2500}),
     HttpClientModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
@@ -36,7 +36,9 @@ import { BondModule } from './bonds/bond.module';
       { path: 'home', component: HomeComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: 'home', pathMatch: 'full'}
-    ], {enableTracing: true}),
+    ], 
+    //{enableTracing: true}
+    ),
     BondModule
   ],
   providers: [
