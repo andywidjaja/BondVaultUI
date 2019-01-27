@@ -6,6 +6,10 @@ import { FormGroup, FormControl, FormBuilder, Validators, AbstractControl } from
 import { debounceTime } from 'rxjs/operators';
 import { IAssetType } from './assetType';
 import { ICouponType } from './couponType';
+import { Store, select } from '@ngrx/store';
+import * as fromBond from './state/bond.reducer';
+import * as bondActions from './state/bond.actions';
+
 //import { MatDatepicker } from '@angular/material';
 //import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
@@ -31,7 +35,8 @@ export class BondDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private bondService: BondService,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private store: Store<fromBond.State>) {
   }
 
   ngOnInit() {
@@ -44,7 +49,7 @@ export class BondDetailComponent implements OnInit {
       bankQualifiedFlag: [''],
       datedDate: [null]
     });
-
+    
     // Get the id from url
     let id = this.route.snapshot.paramMap.get('id');
     //console.log('id: ' + id);
@@ -77,6 +82,7 @@ export class BondDetailComponent implements OnInit {
     this.bondService.getBond(id).subscribe(
       (bond: IBond) => {
         //console.log(bond);
+        //this.store.dispatch(new bondActions.SetCurrentBond(bond));
         this.displayBond(bond);
       },
       error => this.errorMessage = <any>error);

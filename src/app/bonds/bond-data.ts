@@ -1,6 +1,7 @@
 import { InMemoryDbService } from "angular-in-memory-web-api";
 import { IAssetType } from "./assetType";
 import { ICouponType } from "./couponType";
+import { IBond } from "./bond";
 
 export class BondData implements InMemoryDbService {
     createDb() {
@@ -25,6 +26,63 @@ export class BondData implements InMemoryDbService {
             {'id': 18, 'assetType': 'USGOVT'}
         ];
 
+        const bonds: IBond[] = [
+            {
+                "id":1,
+                "cusip":"005176JN3",
+                "assetType":"MUNIGM",
+                "issuerIndustry":"SCD",
+                "mortgageAmortizationTypeLevel":null,
+                "mortgageType":"",
+                "mortgagePrepayType":"",
+                "securityType":"FIXED",
+                "securityType2":"",
+                "couponType":"FIXED",
+                "marketSectorDescription":"Muni",
+                "mortgageCollateralType":"",
+                "taxCode":"EXMP",
+                "bankQualified": false,
+                "datedDate": new Date(2016, 9, 21),
+                "capitalPurpose":"REF"
+            },
+            {
+                "id":2,
+                "cusip":"005518VJ1",
+                "assetType":"MUNIGM",
+                "issuerIndustry":"SCD",
+                "mortgageAmortizationTypeLevel":null,
+                "mortgageType":"",
+                "mortgagePrepayType":"",
+                "securityType":"FIXED",
+                "securityType2":"",
+                "couponType":"FIXED",
+                "marketSectorDescription":"Muni",
+                "mortgageCollateralType":"",
+                "taxCode":"EXMP",
+                "bankQualified": false,
+                "datedDate": new Date(2015, 12, 17),
+                "capitalPurpose":"NEW"
+            },
+            {
+                "id":3,
+                "cusip":"035681DR3",
+                "assetType":"MUNIGM",
+                "issuerIndustry":"SCD",
+                "mortgageAmortizationTypeLevel":null,
+                "mortgageType":"",
+                "mortgagePrepayType":"",
+                "securityType":"FIXED",
+                "securityType2":"",
+                "couponType":"FIXED",
+                "marketSectorDescription":"Muni",
+                "mortgageCollateralType":"",
+                "taxCode":"EXMP",
+                "bankQualified": false,
+                "datedDate": new Date(2016, 8, 18),
+                "capitalPurpose":"NEW"
+            }
+        ];
+
         const couponTypes: ICouponType[] = [
             {'id': 1, 'couponType': 'ADJ CONV. TO FIXED'},
             {'id': 2, 'couponType': 'ADJUSTABLE'},
@@ -44,6 +102,7 @@ export class BondData implements InMemoryDbService {
 
         return {
             assetTypes: assetTypes,
+            bonds: bonds,
             couponTypes: couponTypes
         };
     }
